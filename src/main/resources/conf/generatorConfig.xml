@@ -36,7 +36,7 @@
         </javaModelGenerator>
 
         <!--生成的.xml配置文件存放路径-->
-        <sqlMapGenerator targetPackage="mapping/" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/resources">
+        <sqlMapGenerator targetPackage="mapper/" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
