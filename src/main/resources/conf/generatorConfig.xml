@@ -41,7 +41,7 @@
         </sqlMapGenerator>
 
         <!--生成的实体接口存放路径、指定类型、包路径-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yyy.rutu.sxfy.mapper" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yyy.rutu.sxfy.dao" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 

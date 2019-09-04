@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * @date 2019.09.03
  */
 @Configuration
-@MapperScan(basePackages = {"com.yyy.rutu.sxfy.mapper"}, sqlSessionFactoryRef = "sxfySqlSessionFactory")
+@MapperScan(basePackages = {"com.yyy.rutu.sxfy.dao"}, sqlSessionFactoryRef = "sxfySqlSessionFactory")
 public class SfxyMyBatisConfig {
 
     @Autowired
@@ -30,7 +30,7 @@ public class SfxyMyBatisConfig {
     public SqlSessionFactory sxfySqlSessionFactory(ApplicationContext applicationContext) throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(sxfyDataSource);
-        factoryBean.setMapperLocations(applicationContext.getResources("classpath*:mapper/fortunedb/*.xml"));
+        factoryBean.setMapperLocations(applicationContext.getResources("classpath*:mapper/*.xml"));
         return factoryBean.getObject();
     }
 

@@ -1,4 +1,4 @@
-package com.yyy.rutu.sxfy.mapper;
+package com.yyy.rutu.sxfy.dao;
 
 import com.yyy.rutu.sxfy.entity.FUser;
 
