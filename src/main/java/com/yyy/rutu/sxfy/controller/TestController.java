@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @RestController
-@RequestMapping("/sxfy")
+@RequestMapping("/test")
 public class TestController {
 
     private Logger logger = LoggerFactory.getLogger(TestController.class);
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    @RequestMapping(value = "/test1", method = RequestMethod.POST)
     @ResponseBody
-    public String test(@RequestParam("num") int num){
+    public String test1(@RequestParam("num") int num){
         logger.info("Request is beginning ...");
         return "Request is successful :testNumber is " +num;
     }

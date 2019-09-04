@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--引入外部配置文件-->
+    <properties resource="application.properties"/>
+
+    <!--数据库驱动文件存放路径-->
+    <classPathEntry location="/Users/yuanyuanyang/Documents/develop/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar" />
+
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接 用户名 密码配置-->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--生成的实体类存放路径、指定包路径-->
+        <javaModelGenerator targetPackage="com.yyy.rutu.sxfy.entity" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--生成的.xml配置文件存放路径-->
+        <sqlMapGenerator targetPackage="mapping/" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--生成的实体接口存放路径、指定类型、包路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.yyy.rutu.sxfy.mapper" targetProject="/Users/yuanyuanyang/Documents/IdeaProjects/sxfy/src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!--表名、指定对应实体类名-->
+        <table tableName="f_user" domainObjectName="FUser"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>
