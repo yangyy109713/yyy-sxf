@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Hello Spring MVC CRUD </title>
+</head>
+<body>
+    <h2>Success !!!</h2>
+
+    <div th:text="${hello}"> 这里显示欢迎信息hello text </div>
+    <br>
+
+    <div th:text="${hello1}"> 这里显示欢迎信息hello1 text </div>
+    <br>
+
+    <div th:utext="${hello1}">这里显示欢迎信息hello1 utext</div>
+    <br>
+
+    <!--th:each 每次遍历，都会生成当前这个标签-->
+    <h4 th:text="${user}" th:each="user:${users}"></h4>
+    <br>
+
+    <!--一个h4标签中，有多个span-->
+    <h4>
+        <!--<span th:text="${user}" th:each="user:${users}"></span>-->
+        <span th:each="user:${users}">[[${user}]]</span>
+        <span th:each="user:${users}">[(${user})]</span>
+    </h4>
+
+</body>
+</html>
