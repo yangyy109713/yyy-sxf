@@ -46,7 +46,7 @@
         </javaClientGenerator>
 
         <!--表名、指定对应实体类名-->
-        <table tableName="f_user" domainObjectName="FUser"
+        <table tableName="f_dept" domainObjectName="FDept"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

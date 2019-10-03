@@ -2,8 +2,13 @@ package com.yyy.rutu.sxfy.service;
 
 import com.yyy.rutu.sxfy.entity.FUser;
 
+import java.util.List;
+
 public interface FUserService {
 
-    FUser findUser(int id);//根据id查询用户
+    FUser getUser(int id);//根据id查询用户
 
+    FUser getUserByNameAndPass(String name, String password);
+
+    List<FUser> getUserList();
 }
