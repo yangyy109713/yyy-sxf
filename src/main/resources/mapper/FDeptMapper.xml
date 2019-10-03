@@ -9,10 +9,10 @@
     id, dept_name
   </sql>
 
-  <select id="selectDeptList">
+  <select id="selectDeptList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    form f_dept
+    from f_dept
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -21,7 +21,6 @@
     from f_dept
     where id = #{id,jdbcType=INTEGER}
   </select>
-
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from f_dept

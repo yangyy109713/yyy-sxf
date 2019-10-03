@@ -27,6 +27,16 @@ public class FUserController {
     @Autowired
     FDeptService fDeptService;
 
+    /*
+    //指定到模版引擎使用的首页
+    @RequestMapping("/")
+    public String index(){
+        return "login";
+    }
+    */
+
+
+    //用户列表
     @GetMapping("/users")
     public String userList(Model model){
         Collection<FUser> users =  fUserService.getUserList();
@@ -43,21 +53,68 @@ public class FUserController {
         return "user/list";
     }
 
-    //点击"添加用户"，来到添加页面
+    //添加用户--点击"添加用户"，来到添加页面
     @GetMapping("/user")
     public String toAddPage(Model model){
+        //查询出所有部门信息，在页面上显示
         Collection<FDept> depts = fDeptService.getDepts();
         model.addAttribute("depts", depts);
         return "user/add";
     }
 
-    /*
-    //指定到模版引擎使用的首页
-    @RequestMapping("/")
-    public String index(){
-        return "login";
+    //添加用户--提交
+    /**
+     * Spring MVC自动将请求参数和入参对象的属性一一对应
+     * 要求请求参数的名字和javaBean入参对象里属性名相同
+     * @param user 待添加的对象
+     * @return 重定向到用户列表页
+     */
+    @PostMapping("user")
+    public String addUser(FUser user){
+        //System.out.println("add user："+ user.toString());
+        Integer i = fUserService.addUser(user);
+        if(i != null){
+            logger.info("添加用户："+ user.toString() + " 成功");
+        }
+        // redirect: 表示重定向到一个地址  /代表当前项目路径
+        // forward: 表示转发到一个地址
+        return "redirect:/users";
     }
-    */
+
+    //进入编辑页面，查询当前员工，在页面回显
+    @GetMapping("/user/{id}")
+    public String toEditPage(@PathVariable("id") Integer id, Model model){
+        FUser fUser = fUserService.getUser(id);
+        FDept fDept = fDeptService.getDept(fUser.getDeptId());
+        fUser.setDept(fDept);
+
+        model.addAttribute("user",  fUser);//用于编辑页面，回显员工信息
+
+        Collection<FDept> depts = fDeptService.getDepts();
+        model.addAttribute("depts",  depts);//用于编辑页面，回显所有部门信息
+
+        return "user/add";//和添加页面公用一个页面
+    }
+
+    @PutMapping("/user")
+    public String editUser(FUser user){
+        System.out.println("update user："+ user.toString());
+        Integer i = fUserService.updateUser(user);
+        if(i != null){
+            logger.info("编辑用户："+ user.toString() + " 成功");
+        }
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/user/{id}")
+    public String delUser(@PathVariable("id") Integer id){
+        FUser user = fUserService.getUser(id);
+        Integer i = fUserService.deleteUser(id);
+        if(i != null){
+            logger.info("删除用户："+ user.toString()+ " 成功");
+        }
+        return "redirect:/users";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/user/getUser",

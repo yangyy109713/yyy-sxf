@@ -1,5 +1,7 @@
 package com.yyy.rutu.sxfy.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class FUser {
@@ -13,6 +15,9 @@ public class FUser {
 
     private String email;
 
+    //解决报错： Failed to convert from type [java.lang.String] to type [java.util.Date] for value '2019-09-29
+    //如果已在application.properties中指定日期格式（spring.mvc.date-format=yyyy-MM-dd），则不需要下面的注解
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
 
     private Integer deptId;
@@ -103,7 +108,6 @@ public class FUser {
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
                 ", deptId=" + deptId +
-                ", dept=" + dept +
                 '}';
     }
 }

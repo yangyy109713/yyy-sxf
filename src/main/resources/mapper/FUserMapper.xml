@@ -46,7 +46,7 @@
       real_name, email, birth, 
       dept_id)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=TIMESTAMP}, 
+      #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{birth,jdbcType=TIMESTAMP},
       #{deptId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.yyy.rutu.sxfy.entity.FUser">

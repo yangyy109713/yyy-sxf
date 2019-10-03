@@ -29,4 +29,19 @@ public class FUserServiceImpl implements FUserService {
     public List<FUser> getUserList() {
         return fUserMapper.selectUserList();
     }
+
+    @Override
+    public int addUser(FUser user) {
+       return fUserMapper.insert(user);
+    }
+
+    @Override
+    public int updateUser(FUser user) {
+        return fUserMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public int deleteUser(Integer id) {
+        return fUserMapper.deleteByPrimaryKey(id);
+    }
 }

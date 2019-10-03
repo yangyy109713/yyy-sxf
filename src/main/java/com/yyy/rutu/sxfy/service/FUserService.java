@@ -11,4 +11,10 @@ public interface FUserService {
     FUser getUserByNameAndPass(String name, String password);
 
     List<FUser> getUserList();
+
+    int addUser(FUser user);
+
+    int updateUser(FUser user);
+
+    int deleteUser(Integer id);
 }
