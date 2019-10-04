@@ -2,6 +2,7 @@ package com.yyy.rutu.sxfy.config;
 
 import com.yyy.rutu.sxfy.component.LoginHandlerInterceptor;
 import com.yyy.rutu.sxfy.component.MyLocaleResolver;
+import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -11,6 +12,10 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configuration
 //@EnableWebMvc  //全面接管Spring MVC的配置，即不在使用Spring Boot 对Spring MVC的自动配置（访问首页会空白）
 public class MyMvcConfig extends WebMvcConfigurerAdapter {
+
+    public EmbeddedWebServerFactoryCustomizerAutoConfiguration customizerAutoConfiguration(){
+        return new EmbeddedWebServerFactoryCustomizerAutoConfiguration();
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
