@@ -1,5 +1,6 @@
 package com.yyy.rutu.sxfy.controller;
 
+import com.yyy.rutu.sxfy.elastic.FUserLogRepository;
 import com.yyy.rutu.sxfy.entity.FUser;
 import com.yyy.rutu.sxfy.service.FUserService;
 import org.slf4j.Logger;
@@ -20,6 +21,11 @@ public class LoginController {
     @Autowired(required = false)
     FUserService fUserService;
 
+
+    @Autowired
+    private FUserLogRepository fUserLogRepository;
+
+
     // @RequestMapping(value = "/user/login",method = RequestMethod.POST)
     // @DeleteMapping
     // @PutMapping
@@ -31,6 +37,8 @@ public class LoginController {
         FUser fUser = fUserService.getUserByNameAndPass(username, password);
         if(fUser != null && fUser.getId() != null){
             logger.info("login success： " + fUser.toString());
+            fUserLogRepository.save(fUser);//将用户信息写入ES
+
             //登录成功，防止表单重复提交，重定向到主页
             session.setAttribute("loginUser",username);
             return "redirect:/main.html";

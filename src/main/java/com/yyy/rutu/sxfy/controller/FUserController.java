@@ -1,6 +1,7 @@
 package com.yyy.rutu.sxfy.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.yyy.rutu.sxfy.elastic.FUserLogRepository;
 import com.yyy.rutu.sxfy.entity.FDept;
 import com.yyy.rutu.sxfy.entity.FUser;
 import com.yyy.rutu.sxfy.service.FDeptService;
@@ -27,6 +28,11 @@ public class FUserController {
     @Autowired
     FDeptService fDeptService;
 
+    @Autowired
+    //private OperationLogElasticsearchRepository logElasticsearchRepository;
+    private FUserLogRepository fUserLogRepository;
+
+
     /*
     //指定到模版引擎使用的首页
     @RequestMapping("/")
@@ -47,11 +53,15 @@ public class FUserController {
 
         //将用户信息，放在请求域中
         model.addAttribute("users", users);
+        users.stream().forEach(fUser -> {
+            fUserLogRepository.save(fUser);
+        });
 
         // thymeleaf默认会拼串
         // classpath:/templates/xxxx.html
         return "user/list";
     }
+
 
     //添加用户--点击"添加用户"，来到添加页面
     @GetMapping("/user")
@@ -75,6 +85,7 @@ public class FUserController {
         Integer i = fUserService.addUser(user);
         if(i != null){
             logger.info("添加用户："+ user.toString() + " 成功");
+            fUserLogRepository.save(user);
         }
         // redirect: 表示重定向到一个地址  /代表当前项目路径
         // forward: 表示转发到一个地址
@@ -102,6 +113,7 @@ public class FUserController {
         Integer i = fUserService.updateUser(user);
         if(i != null){
             logger.info("编辑用户："+ user.toString() + " 成功");
+            fUserLogRepository.save(user);
         }
         return "redirect:/users";
     }
@@ -112,6 +124,7 @@ public class FUserController {
         Integer i = fUserService.deleteUser(id);
         if(i != null){
             logger.info("删除用户："+ user.toString()+ " 成功");
+            fUserLogRepository.save(user);
         }
         return "redirect:/users";
     }

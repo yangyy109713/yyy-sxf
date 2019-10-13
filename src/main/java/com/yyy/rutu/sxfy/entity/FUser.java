@@ -1,10 +1,14 @@
 package com.yyy.rutu.sxfy.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Document(indexName = "sxfy", type = "operation")
 public class FUser {
+    @Id
     private Integer id;
 
     private String userName;

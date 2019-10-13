@@ -9,7 +9,7 @@ import java.util.Date;
  * ElasticSearch索引对象必须标注@Document注解，indexName为索引名，type为索引类型
  * （PS：这是ElasticSearch特性，同样的索引，可以分为不同的类型，来分别做索引）
  */
-@Document(indexName = "sxfy", type = "log")
+@Document(indexName = "sxfy", type = "operation")
 public class LogEntity {
 
     /**
