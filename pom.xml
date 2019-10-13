@@ -123,7 +123,7 @@
             <artifactId>bootstrap</artifactId>
             <version>4.0.0</version>
         </dependency>
-        <!--通过webJar引入jquery-->
+
 
         <!--导入配置文件处理器，配置文件进行绑定就会有提示-->
         <dependency>

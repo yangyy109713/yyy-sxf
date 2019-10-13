@@ -14,9 +14,9 @@ public class MyLocaleResolver implements LocaleResolver {
     
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
-        String l = request.getParameter("l");
-        Locale locale = Locale.getDefault();
-        if(!StringUtils.isEmpty(l)){
+        String l = request.getParameter("l");//request中带过来的参数，如@{/index.html(l=zh_CN)
+        Locale locale = Locale.getDefault();//如果没带参数，使用默认的区域信息
+        if(!StringUtils.isEmpty(l)){//参数不为空时，根据传参，取国际化配置信息
             String[] split = l.split("_");
             locale = new Locale(split[0],split[1]);
         }
