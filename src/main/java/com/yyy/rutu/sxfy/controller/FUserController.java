@@ -2,8 +2,10 @@ package com.yyy.rutu.sxfy.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.yyy.rutu.sxfy.elastic.FUserLogRepository;
+import com.yyy.rutu.sxfy.elastic.OperationLogRepository;
 import com.yyy.rutu.sxfy.entity.FDept;
 import com.yyy.rutu.sxfy.entity.FUser;
+import com.yyy.rutu.sxfy.entity.LogEntity;
 import com.yyy.rutu.sxfy.service.FDeptService;
 import com.yyy.rutu.sxfy.service.FUserService;
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -29,8 +32,10 @@ public class FUserController {
     FDeptService fDeptService;
 
     @Autowired
-    //private OperationLogElasticsearchRepository logElasticsearchRepository;
     private FUserLogRepository fUserLogRepository;
+
+    @Autowired
+    private OperationLogRepository logRepository;
 
 
     /*
@@ -54,8 +59,14 @@ public class FUserController {
         //将用户信息，放在请求域中
         model.addAttribute("users", users);
         users.stream().forEach(fUser -> {
-            fUserLogRepository.save(fUser);
+            fUserLogRepository.save(fUser);//将所有用户信息写入ES中
         });
+
+        LogEntity logEntity = new LogEntity();
+        logEntity.setOperation("search user list");
+        logEntity.setId(2);
+        logEntity.setTime(new Date());
+        logRepository.save(logEntity);//
 
         // thymeleaf默认会拼串
         // classpath:/templates/xxxx.html
@@ -85,7 +96,15 @@ public class FUserController {
         Integer i = fUserService.addUser(user);
         if(i != null){
             logger.info("添加用户："+ user.toString() + " 成功");
-            fUserLogRepository.save(user);
+            fUserLogRepository.save(user);//新增用户成功，将用户加入ES中
+
+            LogEntity logEntity = new LogEntity();
+            logEntity.setOperation("add user");
+            logEntity.setName(user.getUserName());
+            logEntity.setId(3);
+            logEntity.setTime(new Date());
+            logRepository.save(logEntity);//
+
         }
         // redirect: 表示重定向到一个地址  /代表当前项目路径
         // forward: 表示转发到一个地址
@@ -113,7 +132,15 @@ public class FUserController {
         Integer i = fUserService.updateUser(user);
         if(i != null){
             logger.info("编辑用户："+ user.toString() + " 成功");
-            fUserLogRepository.save(user);
+            fUserLogRepository.save(user);//编辑用户成功，更新ES中信息
+
+            LogEntity logEntity = new LogEntity();
+            logEntity.setOperation("edit user");
+            logEntity.setName(user.getUserName());
+            logEntity.setId(4);
+            logEntity.setTime(new Date());
+            logRepository.save(logEntity);//
+
         }
         return "redirect:/users";
     }
@@ -124,10 +151,21 @@ public class FUserController {
         Integer i = fUserService.deleteUser(id);
         if(i != null){
             logger.info("删除用户："+ user.toString()+ " 成功");
-            fUserLogRepository.save(user);
+            fUserLogRepository.delete(user);//删除用户成功，将ES中信息删除
+
+            LogEntity logEntity = new LogEntity();
+            logEntity.setOperation("delete user");
+            logEntity.setName(user.getUserName());
+            logEntity.setId(5);
+            logEntity.setTime(new Date());
+            logRepository.save(logEntity);//
+
         }
         return "redirect:/users";
     }
+
+
+
 
     @ResponseBody
     @RequestMapping(value = "/user/getUser",

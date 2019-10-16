@@ -1,7 +1,9 @@
 package com.yyy.rutu.sxfy.controller;
 
 import com.yyy.rutu.sxfy.elastic.FUserLogRepository;
+import com.yyy.rutu.sxfy.elastic.OperationLogRepository;
 import com.yyy.rutu.sxfy.entity.FUser;
+import com.yyy.rutu.sxfy.entity.LogEntity;
 import com.yyy.rutu.sxfy.service.FUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -25,6 +28,9 @@ public class LoginController {
     @Autowired
     private FUserLogRepository fUserLogRepository;
 
+    @Autowired
+    private OperationLogRepository logRepository;
+
 
     // @RequestMapping(value = "/user/login",method = RequestMethod.POST)
     // @DeleteMapping
@@ -38,6 +44,13 @@ public class LoginController {
         if(fUser != null && fUser.getId() != null){
             logger.info("login success： " + fUser.toString());
             fUserLogRepository.save(fUser);//将用户信息写入ES
+
+            LogEntity logEntity = new LogEntity();
+            logEntity.setOperation("login");
+            logEntity.setName(fUser.getUserName());
+            logEntity.setId(1);
+            logEntity.setTime(new Date());
+            logRepository.save(logEntity);//
 
             //登录成功，防止表单重复提交，重定向到主页
             session.setAttribute("loginUser",username);

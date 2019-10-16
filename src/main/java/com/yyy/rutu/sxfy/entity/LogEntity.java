@@ -9,7 +9,7 @@ import java.util.Date;
  * ElasticSearch索引对象必须标注@Document注解，indexName为索引名，type为索引类型
  * （PS：这是ElasticSearch特性，同样的索引，可以分为不同的类型，来分别做索引）
  */
-@Document(indexName = "sxfy", type = "operation")
+@Document(indexName = "logging", type = "operation")
 public class LogEntity {
 
     /**
@@ -18,7 +18,7 @@ public class LogEntity {
      * @Id是org.springframework.data.annotation.Id
      */
     @Id
-    private String id;
+    private Integer id;
 
     private String name;
 
@@ -26,11 +26,11 @@ public class LogEntity {
 
     private Date time;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
