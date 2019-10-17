@@ -59,14 +59,14 @@ public class FUserController {
         //将用户信息，放在请求域中
         model.addAttribute("users", users);
         users.stream().forEach(fUser -> {
-            fUserLogRepository.save(fUser);//将所有用户信息写入ES中
+            fUserLogRepository.save(fUser);//将所有用户信息写入ES中（索引格式：/sxfy/operation）
         });
 
         LogEntity logEntity = new LogEntity();
         logEntity.setOperation("search user list");
         logEntity.setId(2);
         logEntity.setTime(new Date());
-        logRepository.save(logEntity);//
+        logRepository.save(logEntity);//操作日志:查询用户列表，写入ES中（索引格式：/logging/operation）
 
         // thymeleaf默认会拼串
         // classpath:/templates/xxxx.html
@@ -103,7 +103,7 @@ public class FUserController {
             logEntity.setName(user.getUserName());
             logEntity.setId(3);
             logEntity.setTime(new Date());
-            logRepository.save(logEntity);//
+            logRepository.save(logEntity);//操作日志:添加用户，写入ES中
 
         }
         // redirect: 表示重定向到一个地址  /代表当前项目路径
@@ -139,7 +139,7 @@ public class FUserController {
             logEntity.setName(user.getUserName());
             logEntity.setId(4);
             logEntity.setTime(new Date());
-            logRepository.save(logEntity);//
+            logRepository.save(logEntity);//操作日志:编辑用户，写入ES中
 
         }
         return "redirect:/users";
@@ -158,7 +158,7 @@ public class FUserController {
             logEntity.setName(user.getUserName());
             logEntity.setId(5);
             logEntity.setTime(new Date());
-            logRepository.save(logEntity);//
+            logRepository.save(logEntity);//操作日志:删除用户，写入ES中
 
         }
         return "redirect:/users";
