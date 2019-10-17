@@ -50,7 +50,7 @@ public class LoginController {
             logEntity.setName(fUser.getUserName());
             logEntity.setId(1);
             logEntity.setTime(new Date());
-            logRepository.save(logEntity);//
+            logRepository.save(logEntity);//操作日志:登录，写入ES中
 
             //登录成功，防止表单重复提交，重定向到主页
             session.setAttribute("loginUser",username);
