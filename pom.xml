@@ -94,6 +94,12 @@
             <version>2.7</version>
         </dependency>
 
+        <!--引入redis依赖：服务器上已安装redis4.0.2-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--elastic search begin-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

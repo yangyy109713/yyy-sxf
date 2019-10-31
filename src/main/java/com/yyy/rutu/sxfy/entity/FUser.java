@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,7 @@ import java.util.Date;
  * （PS：这是ElasticSearch特性，同样的索引，可以分为不同的类型，来分别做索引）
  */
 @Document(indexName = "sxfy", type = "operation")
-public class FUser {
+public class FUser implements Serializable {
     @Id
     private Integer id;
 
@@ -34,6 +35,17 @@ public class FUser {
     private FDept dept;
 
     private Integer gender;
+
+    public FUser(){
+
+    }
+
+    public FUser(Integer id, String userName, String password, String realName) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.realName = realName;
+    }
 
     public Integer getId() {
         return id;
