@@ -1,10 +1,13 @@
 package com.yyy.rutu.sxfy;
 
+import org.junit.Test;
+
 import java.math.BigDecimal;
 
-public class Test {
+public class RecruitRiderDiffOrdersTest {
 
-    public static void main(String[] args){
+    @Test
+    public void test(){
         BigDecimal C = new BigDecimal(42);
         BigDecimal S = new BigDecimal(30);
         BigDecimal M = new BigDecimal(12);
