@@ -3,16 +3,23 @@ package com.yyy.rutu.sxfy;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
- * 开启Elasticsearch
+ * 开启基于注解的 Elasticsearch
  * 使用注解 @EnableElasticsearchRepositories
  * basePackages指向elasticsearch仓储类所在的包
  */
 @EnableElasticsearchRepositories(basePackages = "com.yyy.rutu.sxfy.elastic")
+
+/**
+ * 开启基于注解的 RabbitMQ
+ */
+// @EnableRabbit
+
 @SpringBootApplication
 //指定要扫描的mapper
 @MapperScan(value = "mapper")

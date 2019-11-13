@@ -40,6 +40,12 @@ public class FUser implements Serializable {
 
     }
 
+    public FUser(String userName, String password, String realName) {
+        this.userName = userName;
+        this.password = password;
+        this.realName = realName;
+    }
+
     public FUser(Integer id, String userName, String password, String realName) {
         this.id = id;
         this.userName = userName;

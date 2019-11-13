@@ -17,7 +17,7 @@ import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SxfyApplicationTests {
+public class RedisTemplateTests {
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;//操作key-value都是字符串
