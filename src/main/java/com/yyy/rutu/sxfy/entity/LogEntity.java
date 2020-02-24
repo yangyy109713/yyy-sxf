@@ -1,7 +1,9 @@
 package com.yyy.rutu.sxfy.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -25,7 +27,32 @@ public class LogEntity {
 
     private String operation;
 
+    /**
+     * @JsonFormat 服务端到前端时间格式转换，即出参格式化
+     * 可以设置时间格式、时区
+     * pattern：需要转换的时间日期的格式
+     * timezone：时区，设置为东八区，避免时间转换存在误差
+     * 作用：实体类接收数据库查询结果时，直接按 pattern 转换时间格式，然后传给前端
+     * 注意：使用 @JsonFormat 注解，可以在属性的Get方法上，也可以在属性上
+     *
+     * @DateTimeFormat 前端到服务端时间格式转换，即入参格式化
+     * 可以设置时间格式、时区
+     * pattern：需要转换的时间日期的格式
+     * timezone：时区，设置为东八区，避免时间转换存在误差
+     * 作用：实体类接收前端数据时，直接按 pattern 转换时间格式，然后存入数据库
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
     private Date time;
+
+    public LogEntity() {
+    }
+
+    public LogEntity(String name, String operation, Date time) {
+        this.name = name;
+        this.operation = operation;
+        this.time = time;
+    }
 
     public Integer getId() {
         return id;
