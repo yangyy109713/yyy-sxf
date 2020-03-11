@@ -2,7 +2,7 @@ package com.yyy.rutu.test.threads;
 
 import java.util.concurrent.locks.ReentrantLock;
 
-public class ReenTrantLockTest {
+public class ReentrantLockTest {
 
     public static void main(String[] args){
         ReentrantLock lock = new ReentrantLock();
